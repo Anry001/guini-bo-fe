@@ -10,18 +10,25 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useForm } from 'react-hook-form';
 
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get('email'),
+  //     password: data.get('password'),
+  //   });
+  // };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   return (
     <ThemeProvider theme={theme}>
@@ -43,7 +50,7 @@ export default function SignIn() {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit((data) => console.log(data))}
             noValidate
             sx={{ mt: 1 }}
           >
@@ -53,7 +60,7 @@ export default function SignIn() {
               fullWidth
               id="user-name"
               label="User Name"
-              name="user-name"
+              {...register('userName')}
               autoComplete="user-name"
               autoFocus
             />
@@ -61,7 +68,7 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              name="password"
+              {...register('userName')}
               label="Password"
               type="password"
               id="password"
