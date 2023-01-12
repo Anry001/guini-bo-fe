@@ -1,103 +1,87 @@
-import styled from 'styled-components';
-import { useState } from 'react';
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    center;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+const theme = createTheme();
 
-const Wrapper = styled.div`
-  width: 25%;
-  padding: 20px;
-  background-color: white;
-`;
-
-const Title = styled.h1`
-  font-style: 24px;
-  font-weight: 300;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Input = styled.input`
-  flex: 1;
-  min-width: 40%;
-  margin: 10px 0px;
-  padding: 10px;
-`;
-
-const Button = styled.button`
-  width: 40%;
-  border: none;
-  padding: 15px 20px;
-  background-color: teal;
-  color: white;
-  cursor: pointer;
-  margin-bottom: 10px;
-  &:disabled {
-    color: green;
-    cursor: not-allowed;
-  }
-`;
-
-const Link = styled.a`
-  margin: 5px 0px;
-  flex: 12px;
-  text-decoration: underline;
-  cursor: pointer;
-`;
-
-const Error = styled.span`
-  color: red;
-`;
-
-const App = () => {
-  const [username, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  // const dispatch = useDispatch();
-  // const { isFetching, error } = useSelector((state) => state.user);
-
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  //   login(dispatch, { username, password });
-  // };
+export default function SignIn() {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+  };
 
   return (
-    <Container>
-      <Wrapper>
-        <Title>ADMIN LOGIN</Title>
-        <Form>
-          <Input
-            placeholder="username"
-            onChange={(e) => setUserName(e.target.value)}
-          />
-          <Input
-            placeholder="password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button /* onClick={handleClick} */ /* disabled={isFetching} */>
-            LOGIN
-          </Button>
-          {/* {error && <Error>Something went wrong...</Error>} */}
-          {/* <Link>DONT YOU REMEMBER THE PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link> */}
-        </Form>
-      </Wrapper>
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            ADMIN LOGIN
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="user-name"
+              label="User Name"
+              name="user-name"
+              autoComplete="user-name"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
-};
-
-export default App;
+}
