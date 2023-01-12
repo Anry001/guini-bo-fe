@@ -1,34 +1,103 @@
+import styled from 'styled-components';
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0);
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Wrapper = styled.div`
+  width: 25%;
+  padding: 20px;
+  background-color: white;
+`;
+
+const Title = styled.h1`
+  font-style: 24px;
+  font-weight: 300;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Input = styled.input`
+  flex: 1;
+  min-width: 40%;
+  margin: 10px 0px;
+  padding: 10px;
+`;
+
+const Button = styled.button`
+  width: 40%;
+  border: none;
+  padding: 15px 20px;
+  background-color: teal;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+  &:disabled {
+    color: green;
+    cursor: not-allowed;
+  }
+`;
+
+const Link = styled.a`
+  margin: 5px 0px;
+  flex: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
+const Error = styled.span`
+  color: red;
+`;
+
+const App = () => {
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  // const dispatch = useDispatch();
+  // const { isFetching, error } = useSelector((state) => state.user);
+
+  // const handleClick = (e) => {
+  //   e.preventDefault();
+  //   login(dispatch, { username, password });
+  // };
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <Container>
+      <Wrapper>
+        <Title>ADMIN LOGIN</Title>
+        <Form>
+          <Input
+            placeholder="username"
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          <Input
+            placeholder="password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button /* onClick={handleClick} */ /* disabled={isFetching} */>
+            LOGIN
+          </Button>
+          {/* {error && <Error>Something went wrong...</Error>} */}
+          {/* <Link>DONT YOU REMEMBER THE PASSWORD?</Link>
+          <Link>CREATE A NEW ACCOUNT</Link> */}
+        </Form>
+      </Wrapper>
+    </Container>
   );
-}
+};
 
 export default App;
