@@ -15,20 +15,13 @@ import { useForm } from 'react-hook-form';
 const theme = createTheme();
 
 export default function SignIn() {
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-  // };
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  console.log(errors);
 
   return (
     <ThemeProvider theme={theme}>
@@ -45,9 +38,18 @@ export default function SignIn() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            ADMIN LOGIN
-          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '450px',
+            }}
+          >
+            <Typography component="h1" variant="h5">
+              WELCOME TO THE ADMIN LOGIN PAGE
+            </Typography>
+          </Box>
           <Box
             component="form"
             onSubmit={handleSubmit((data) => console.log(data))}
@@ -60,7 +62,7 @@ export default function SignIn() {
               fullWidth
               id="user-name"
               label="User Name"
-              {...register('userName')}
+              {...register('userName', { required: 'User name required' })}
               autoComplete="user-name"
               autoFocus
             />
@@ -68,7 +70,7 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              {...register('userName')}
+              {...register('userName', { required: 'Password required' })}
               label="Password"
               type="password"
               id="password"
