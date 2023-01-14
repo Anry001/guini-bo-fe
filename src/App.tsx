@@ -1,96 +1,46 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from 'react-hook-form';
 
 const theme = createTheme();
+interface LoginFormData {
+  username: string;
+  password: string;
+  rememberMe: boolean;
+}
 
 export default function SignIn() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<LoginFormData>();
 
   console.log(errors);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              width: '450px',
-            }}
-          >
-            <Typography component="h1" variant="h5">
-              WELCOME TO THE ADMIN LOGIN PAGE
-            </Typography>
-          </Box>
-          <Box
-            component="form"
-            onSubmit={handleSubmit((data) => console.log(data))}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="user-name"
-              label="User Name"
-              {...register('userName', { required: 'User name required' })}
-              autoComplete="user-name"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              {...register('userName', { required: 'Password required' })}
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+    <>
+      <Typography component="h1" variant="h5">
+        WELCOME TO THE ADMIN LOGIN PAGE
+      </Typography>
+      <form onSubmit={handleSubmit((data) => console.log(data))}>
+        <TextField required label="User Name" {...register('username')} />
+        <TextField
+          required
+          {...register('password', { required: 'Password required' })}
+          label="Password"
+          type="password"
+        />
+        <Button type="submit" variant="contained">
+          Sign In
+        </Button>
+      </form>{' '}
+    </>
   );
 }
+//if i find the the right template find where the specific requirement in the template is, and understand it.
+// learn: https://m2.material.io/design
+//read material introduction page.
+//only use templates if i understand it all
