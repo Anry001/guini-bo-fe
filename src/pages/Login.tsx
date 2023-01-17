@@ -12,18 +12,13 @@ interface LoginFormData {
   password: string;
   rememberMe: boolean;
 }
+const LOGIN_TITLE = 'Welcome to the Admin Login Page';
+const SIGNIN_BUTTON_TEXT = 'Sign In';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  //ask guy why is this necessary, because even when deleted i see no difference
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    event.preventDefault();
-  };
 
   const {
     register,
@@ -31,15 +26,12 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginFormData>();
 
-  console.log(errors);
-
-  const iconAdornment = {
+  const passwordIconAdornment = {
     endAdornment: (
       <InputAdornment position="end">
         <IconButton
           aria-label="toggle password visibility"
           onClick={handleClickShowPassword}
-          onMouseDown={handleMouseDownPassword}
           edge="end"
         >
           {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
@@ -51,7 +43,7 @@ const Login = () => {
   return (
     <Container maxWidth="sm" sx={{ mt: 2 }}>
       <Stack
-        onSubmit={handleSubmit((data) => console.log(data))}
+        onSubmit={handleSubmit(console.log)}
         direction="column"
         justifyContent="center"
         alignItems="stretch"
@@ -59,7 +51,7 @@ const Login = () => {
         component="form"
       >
         <Typography textAlign="center" variant="h5">
-          WELCOME TO THE ADMIN LOGIN PAGE
+          {LOGIN_TITLE}
         </Typography>
         <TextField
           fullWidth
@@ -73,10 +65,10 @@ const Login = () => {
           {...register('password', { required: 'Password required' })}
           label="Password"
           type={showPassword ? 'text' : 'password'}
-          InputProps={iconAdornment}
+          InputProps={passwordIconAdornment}
         />
         <Button type="submit" variant="contained">
-          Sign In
+          {SIGNIN_BUTTON_TEXT}
         </Button>
       </Stack>
     </Container>
