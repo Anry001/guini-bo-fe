@@ -20,11 +20,7 @@ const Login = () => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginFormData>();
+  const { register, handleSubmit } = useForm<LoginFormData>();
 
   const passwordIconAdornment = {
     endAdornment: (

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000",
+    "eslint": "eslint src --color",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
