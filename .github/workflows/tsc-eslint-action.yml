@@ -1,0 +1,24 @@
+name: Typescript TSC Check
+on:
+  pull_request:
+    branches:
+      - master
+      - dev
+      - test
+jobs:
+  lint:
+    name: tsc, eslint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: install node v16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - name: npm ci
+        run: npm ci
+      - name: tsc
+        run: npx tsc
+      - name: eslint
+        run: npm run eslint
