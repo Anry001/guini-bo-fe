@@ -16,6 +16,8 @@ const LOGIN_TITLE = 'Welcome to the Admin Login Page';
 const SIGNIN_BUTTON_TEXT = 'Sign In';
 
 const Login = () => {
+  // const [username, setUserName] = useState('');
+  // const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
