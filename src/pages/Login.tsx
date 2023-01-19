@@ -6,18 +6,25 @@ import { Stack, Container, InputAdornment, IconButton } from '@mui/material';
 import { useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import login from '@src/state-manager/apiCalls';
 
 interface LoginFormData {
   username: string;
   password: string;
   rememberMe: boolean;
 }
+
+interface UserRequestBody {
+  step: 'LOGIN';
+  username: string;
+  password: string;
+  token: string;
+}
+
 const LOGIN_TITLE = 'Welcome to the Admin Login Page';
 const SIGNIN_BUTTON_TEXT = 'Sign In';
 
 const Login = () => {
-  // const [username, setUserName] = useState('');
-  // const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -38,10 +45,24 @@ const Login = () => {
     ),
   };
 
+  // should i construct userRequestData in this method? or should i pass userData to login method and construct UserRequestBody
+  // in the login method? and thus moving the UserRequestBody interface to 'apiCalls' file?
+  // was i supposed to use generrics on this method somehow? or on the login method?
+  const fetchUserData = (userData: LoginFormData) => {
+    const userRequestData: UserRequestBody = {
+      step: 'LOGIN',
+      username: userData.username,
+      password: userData.password,
+      token: 'test token',
+    };
+
+    login(userRequestData);
+  };
+
   return (
     <Container maxWidth="sm" sx={{ mt: 2 }}>
       <Stack
-        onSubmit={handleSubmit(console.log)}
+        onSubmit={handleSubmit(fetchUserData)}
         direction="column"
         justifyContent="center"
         alignItems="stretch"
