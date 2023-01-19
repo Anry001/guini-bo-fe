@@ -1,9 +1,8 @@
 import axios from 'axios';
-
-const BASE_URL = 'https://api.guini.io/admin/api/';
+import env from '@src/config/env';
 
 const publicRequest = axios.create({
-  baseURL: BASE_URL,
+  baseURL: `${env.VITE_BACKEND_URL}/admin/api`,
 });
 
 export default publicRequest;
