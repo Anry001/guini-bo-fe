@@ -7,19 +7,11 @@ import { useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import login from '@src/state-manager/apiCalls';
-// import axios from 'axios';
 
 interface LoginFormData {
   username: string;
   password: string;
   rememberMe: boolean;
-}
-
-interface UserRequestBody {
-  step: 'LOGIN';
-  username: string;
-  password: string;
-  token: string;
 }
 
 const LOGIN_TITLE = 'Welcome to the Admin Login Page';
@@ -46,26 +38,10 @@ const Login = () => {
     ),
   };
 
-  // should i construct userRequestData in this method? or should i pass userData to login method and construct UserRequestBody
-  // in the login method? and thus moving the UserRequestBody interface to 'apiCalls' file?
-  // was i supposed to use generrics on this method somehow? or on the login method?
-  const fetchUserData = /* async */ (userData: LoginFormData) => {
-    const userRequestData: UserRequestBody = {
-      step: 'LOGIN',
-      username: userData.username,
-      password: userData.password,
-      token: 'test token',
-    };
-
-    login(userRequestData);
-
-    // try {
-    //   console.log('logging in from Login.tsx');
-    //   const res = await axios.post('/api/pre-auth', userRequestData);
-    //   console.log(res);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+  const fetchUserData = (userData: LoginFormData) => {
+    // ask guy if is should construct an object of shape 'UserRequestBody' and send it to login method, or should i just send 'userData' as is and take care of the construction
+    // inside the login method?
+    login(userData);
   };
 
   return (

@@ -14,16 +14,6 @@ const { CFG_VITE_PROXY_URL } = devEnv;
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://api.guini.io',
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
-  },
   plugins: [react(), tsconfigPaths()],
   server: {
     proxy: {
