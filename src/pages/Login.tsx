@@ -39,9 +39,11 @@ const Login = () => {
   };
 
   const fetchUserData = (userData: LoginFormData) => {
-    // ask guy if is should construct an object of shape 'UserRequestBody' and send it to login method, or should i just send 'userData' as is and take care of the construction
-    // inside the login method?
-    login(userData);
+    try {
+      login({ username: userData.username, password: userData.password });
+    } catch (e: any) {
+      console.log(e); // will this e be of shape 'ResponseError'? if the server returns a 'ResponseError' then for what do i need the shape?
+    }
   };
 
   return (

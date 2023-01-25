@@ -7,6 +7,11 @@ interface UserRequestBody {
   token: string;
 }
 
+interface UserRequestData {
+  username: string;
+  password: string;
+}
+
 interface User {
   firstName: string;
   lastName: string;
@@ -16,6 +21,7 @@ interface User {
   username: string;
   verified: boolean;
 }
+
 interface ResponseBody {
   accessToken: string;
   refreshToken: string;
@@ -23,30 +29,25 @@ interface ResponseBody {
 }
 
 interface ResponseError {
-  error: string; // what to put here when im building the object what string should go here? the error name?
-  message: string; // and by extension here should only be the error msg?
+  error: string;
+  message: string;
 }
 
-const login = async (user: any) => {
+const login = async ({ username, password }: UserRequestData) => {
   const userData: UserRequestBody = {
     step: 'LOGIN',
-    username: user.username,
-    password: user.password,
+    username,
+    password,
     token: 'test token',
   };
 
-  try {
-    console.log('logging in');
-    const res: ResponseBody = await publicRequest.post('pre-auth', userData); // making this of type 'ResponseBody' allowed?
-    console.log(`after lgoin: ${res}`);
-  } catch (error: any) {
-    // ask guy if this is how i should build the 'ResponseError' object.
-    const resError: ResponseError = {
-      error: error.name,
-      message: error.message,
-    };
-    console.log(resError);
-  }
+  console.log('logging in');
+  const res = await publicRequest.post<ResponseBody, ResponseError>( // ask guy if this is the correct way to get error response or normal body response.
+    'pre-auth',
+    userData,
+  );
+
+  console.log(`after lgoin: ${res}`);
 };
 
 export default login;
