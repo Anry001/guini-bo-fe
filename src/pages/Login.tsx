@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { Stack, Container, InputAdornment, IconButton } from '@mui/material';
 import { useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -38,18 +38,18 @@ const Login = () => {
     ),
   };
 
-  const fetchUserData = (userData: LoginFormData) => {
+  const submitHandler: SubmitHandler<LoginFormData> = (userData) => {
     try {
       login({ username: userData.username, password: userData.password });
-    } catch (e: any) {
-      console.log(e); // will this e be of shape 'ResponseError'? if the server returns a 'ResponseError' then for what do i need the shape?
+    } catch (e: unknown) {
+      console.log(e);
     }
   };
 
   return (
     <Container maxWidth="sm" sx={{ mt: 2 }}>
       <Stack
-        onSubmit={handleSubmit(fetchUserData)}
+        onSubmit={handleSubmit(submitHandler)}
         direction="column"
         justifyContent="center"
         alignItems="stretch"

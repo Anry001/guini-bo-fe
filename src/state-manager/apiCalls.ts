@@ -28,11 +28,6 @@ interface ResponseBody {
   user: User;
 }
 
-interface ResponseError {
-  error: string;
-  message: string;
-}
-
 const login = async ({ username, password }: UserRequestData) => {
   const userData: UserRequestBody = {
     step: 'LOGIN',
@@ -42,11 +37,7 @@ const login = async ({ username, password }: UserRequestData) => {
   };
 
   console.log('logging in');
-  const res = await publicRequest.post<ResponseBody, ResponseError>( // ask guy if this is the correct way to get error response or normal body response.
-    'pre-auth',
-    userData,
-  );
-
+  const res = await publicRequest.post<ResponseBody>('pre-auth', userData);
   console.log(`after lgoin: ${res}`);
 };
 
