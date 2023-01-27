@@ -1,15 +1,23 @@
+import { useAuthStore } from '@features/auth';
 import Container from '@mui/material/Container';
 import React from 'react';
 import login from '../api/login';
 import LoginForm, { LoginFormData } from './LoginForm';
 
+declare module 'local-storage-data' {
+  interface LocalStorageData {
+    key1: string;
+  }
+}
+
 const LoginPage = () => {
   const [loading, setLoading] = React.useState(false);
+  const { setUserData } = useAuthStore();
   const handleSubmit = async ({ username, password }: LoginFormData) => {
     setLoading(true);
     try {
       const res = await login({ username, password });
-      console.log(res);
+      setUserData(res);
     } catch (e: unknown) {
       alert(`${e}`);
     } finally {
