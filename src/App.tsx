@@ -1,7 +1,7 @@
-import Login from './pages/Login';
+import { LoginPage } from '@features/login';
 
 const App = () => {
-  return <Login />;
+  return <LoginPage />;
 };
 
 export default App;
