@@ -1,5 +1,5 @@
-import LocalStorage from '@features/local-storage';
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 export interface User {
   firstName: string;
@@ -16,14 +16,6 @@ export interface AuthData {
   user: User;
 }
 
-declare module 'local-storage-data' {
-  interface LocalStorageData {
-    user: User | null;
-    accessToken: string | null;
-    refreshToken: string | null;
-  }
-}
-
 interface UseAuthStoreData {
   user: User | null;
   accessToken: string | null;
@@ -32,23 +24,24 @@ interface UseAuthStoreData {
   logout: () => void;
 }
 
-const useAuthStore = create<UseAuthStoreData>((set) => ({
-  user: LocalStorage.getItem('user'),
-  accessToken: LocalStorage.getItem('accessToken'),
-  refreshToken: LocalStorage.getItem('refreshToken'),
-
-  setUserData: ({ user, accessToken, refreshToken }) => {
-    set({ user, accessToken, refreshToken });
-    LocalStorage.setItem('user', user);
-    LocalStorage.setItem('accessToken', accessToken);
-    LocalStorage.setItem('refreshToken', refreshToken);
-  },
-  logout: () => {
-    set({ user: null, accessToken: null, refreshToken: null });
-    LocalStorage.removeItem('user');
-    LocalStorage.removeItem('accessToken');
-    LocalStorage.removeItem('refreshToken');
-  },
-}));
+const useAuthStore = create(
+  persist<UseAuthStoreData>(
+    (set) => ({
+      user: null,
+      accessToken: null,
+      refreshToken: null,
+      setUserData: ({ user, accessToken, refreshToken }) => {
+        set({ user, accessToken, refreshToken });
+      },
+      logout: () => {
+        set({ user: null, accessToken: null, refreshToken: null });
+      },
+    }),
+    {
+      name: 'auth',
+      storage: createJSONStorage(() => localStorage),
+    },
+  ),
+);
 
 export default useAuthStore;
