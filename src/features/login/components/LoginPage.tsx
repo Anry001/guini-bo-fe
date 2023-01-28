@@ -4,12 +4,6 @@ import React from 'react';
 import login from '../api/login';
 import LoginForm, { LoginFormData } from './LoginForm';
 
-declare module 'local-storage-data' {
-  interface LocalStorageData {
-    key1: string;
-  }
-}
-
 const LoginPage = () => {
   const [loading, setLoading] = React.useState(false);
   const { setUserData } = useAuthStore();
