@@ -1,27 +1,26 @@
 import { useAuthStore } from '@features/auth';
 import Container from '@mui/material/Container';
 import React from 'react';
-import login from '../api/login';
+import { useLogin } from '../api/login';
 import LoginForm, { LoginFormData } from './LoginForm';
 
 const LoginPage = () => {
-  const [loading, setLoading] = React.useState(false);
   const { setUserData } = useAuthStore();
-  const handleSubmit = async ({ username, password }: LoginFormData) => {
-    setLoading(true);
-    try {
-      const res = await login({ username, password });
-      setUserData(res);
-    } catch (e: unknown) {
-      alert(`${e}`);
-    } finally {
-      setLoading(false);
-    }
+
+  const { mutate, isLoading } = useLogin({
+    config: {
+      onSuccess: (data) => setUserData(data),
+      onError: console.error,
+    },
+  });
+
+  const handleSubmit = ({ username, password }: LoginFormData) => {
+    mutate({ username, password });
   };
 
   return (
     <Container maxWidth="sm" sx={{ mt: 2 }}>
-      <LoginForm onSubmit={handleSubmit} loading={loading} />
+      <LoginForm onSubmit={handleSubmit} loading={isLoading} />
     </Container>
   );
 };

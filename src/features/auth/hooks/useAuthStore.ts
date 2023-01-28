@@ -38,7 +38,7 @@ const useAuthStore = create(
       },
     }),
     {
-      name: 'auth',
+      name: 'auth-store',
       storage: createJSONStorage(() => localStorage),
     },
   ),

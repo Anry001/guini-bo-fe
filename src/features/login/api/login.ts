@@ -1,12 +1,14 @@
 import { AuthData } from '@features/auth';
 import apiRequest from '@utils/apiRequest';
+import { MutationConfig } from '@/lib/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 interface RequestData {
   username: string;
   password: string;
 }
 
-const login = async ({ username, password }: RequestData) => {
+export const login = async ({ username, password }: RequestData) => {
   const res = await apiRequest.post<AuthData>('/admin/api/pre-auth', {
     step: 'LOGIN',
     username,
@@ -16,4 +18,16 @@ const login = async ({ username, password }: RequestData) => {
   return res.data;
 };
 
-export default login;
+type MutationFnType = typeof login;
+
+type UseLoginOptions = {
+  config?: MutationConfig<MutationFnType>;
+};
+
+export const useLogin = ({ config }: UseLoginOptions = {}) => {
+  return useMutation({
+    ...config,
+    mutationKey: ['login'],
+    mutationFn: login,
+  });
+};
