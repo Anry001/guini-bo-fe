@@ -1,7 +1,7 @@
-import { LoginPage } from '@features/login';
+import AppRouterProvider from './AppRouterProvider';
 
 const App = () => {
-  return <LoginPage />;
+  return <AppRouterProvider />;
 };
 
 export default App;
