@@ -1,7 +1,7 @@
 import { useAuthStore } from '@features/auth';
 import Container from '@mui/material/Container';
-import React from 'react';
 import { useLogin } from '../api/login';
+
 import LoginForm, { LoginFormData } from './LoginForm';
 
 const LoginPage = () => {
