@@ -70,7 +70,7 @@
       "error",
       {
         "paths": ["@mui/icons-material", "@mui/material", "@mui/system"],
-        "patterns": ["@mui/*/*/*","@features/*/*"]
+        "patterns": ["@mui/*/*/*", "@features/*/*"]
       }
     ]
   }
