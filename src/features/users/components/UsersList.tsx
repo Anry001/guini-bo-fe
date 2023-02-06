@@ -45,7 +45,7 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
-export default function DataGridDemo() {
+const UsersList = () => {
   return (
     <Box sx={{ height: 400, width: '100%' }}>
       <DataGrid
@@ -59,4 +59,6 @@ export default function DataGridDemo() {
       />
     </Box>
   );
-}
+};
+
+export default UsersList;

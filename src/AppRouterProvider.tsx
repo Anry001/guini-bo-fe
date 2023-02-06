@@ -1,5 +1,6 @@
 import { useAuthStore } from '@features/auth';
 import { LoginPage } from '@features/login';
+import { UsersList } from '@features/users';
 import {
   createBrowserRouter,
   Navigate,
@@ -11,8 +12,9 @@ const publicRoutes = createBrowserRouter([
   { path: 'login', element: <LoginPage /> },
 ]);
 
+// put here the datatable?
 const protectedRoutes = createBrowserRouter([
-  { path: '*', element: 'todo' },
+  { path: '*', element: /* 'todo' */ <UsersList /> },
   { path: 'login', element: <Navigate to="/" /> },
 ]);
 
