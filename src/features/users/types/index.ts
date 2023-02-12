@@ -1,4 +1,4 @@
-type UserStatus =
+export type UserStatus =
   | 'UNCONFIRMED'
   | 'CONFIRMED'
   | 'EXTERNAL_PROVIDER'
@@ -7,7 +7,7 @@ type UserStatus =
   | 'RESET_REQUIRED'
   | 'FORCE_CHANGE_PASSWORD';
 
-interface User {
+export interface User {
   email: string;
   emailVerified: boolean;
   firstName: string;
@@ -17,5 +17,3 @@ interface User {
   userStatus: UserStatus;
   username: string;
 }
-
-export type ResponseData = User[];

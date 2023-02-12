@@ -1,11 +1,11 @@
-import apiRequest from '@utils/apiRequest';
+// import apiRequest from '@utils/apiRequest';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { useEffect, useState } from 'react';
-import { ResponseData } from '../types';
-// import { getUsers } from '../api/getUsers';
+import { useQuery } from '@tanstack/react-query';
+// import { ResponseData } from '../types';
+import { getUsers } from '../api/getUsers';
 
-// build the columns arabicly
+// implement this file with react query
 
 type UserStatus =
   | 'UNCONFIRMED'
@@ -79,20 +79,12 @@ const columns: GridColDef<User>[] = [
 ];
 
 const UsersList = () => {
-  const [rows, setRows] = useState<ResponseData>([]);
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const res = await apiRequest.get<ResponseData>('/admin/api/users');
-      setRows(res.data);
-    };
-    getUsers();
-  }, [rows]); // {q} ask guy if this should be like this?
+  const { data = [] } = useQuery(['users'], getUsers);
 
   return (
     <Box sx={{ height: 400, width: '100%' }}>
       <DataGrid
-        rows={rows}
+        rows={data}
         columns={columns}
         getRowId={(row) => row.username}
         pageSize={5}
