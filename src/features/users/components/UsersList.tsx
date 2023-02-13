@@ -4,56 +4,57 @@ import { useUsers } from '../api/getUsers';
 import { User } from '../types';
 
 const columns: GridColDef<User>[] = [
-  { field: 'email', headerName: 'ID', width: 90 },
+  { field: 'email', headerName: 'Email', width: 200 },
   {
     field: 'emailVerified',
-    headerName: 'First name',
-    width: 150,
+    headerName: 'Email Verified',
+    width: 115,
     editable: true,
   },
   {
     field: 'firstName',
-    headerName: 'Last name',
-    width: 150,
+    headerName: 'First name',
+    width: 100,
     editable: true,
   },
   {
     field: 'lastName',
-    headerName: 'Age',
+    headerName: 'Last name',
     type: 'number',
-    width: 110,
+    width: 120,
     editable: true,
   },
   {
     field: 'phoneNumber',
-    headerName: 'Full name',
+    headerName: 'Phone number',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
-    width: 160,
+    width: 125,
   },
   {
     field: 'phoneVerified',
-    headerName: 'Full name',
+    headerName: 'Phone Verified',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
-    width: 160,
+    width: 110,
   },
   {
     field: 'userStatus',
-    headerName: 'Full name',
+    headerName: 'User status',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
-    width: 160,
+    width: 220,
   },
   {
     field: 'username',
-    headerName: 'Full name',
+    headerName: 'Username',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
-    width: 160,
+    width: 250,
   },
 ];
 
+// eslint-disable-next-line import/prefer-default-export
 export const UsersList = () => {
   const { data = [], isLoading } = useUsers();
 
