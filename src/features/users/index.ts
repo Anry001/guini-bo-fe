@@ -1,3 +1,3 @@
-import UsersList from './components/UsersList';
+export * from './types';
 
-export { UsersList };
+export * from './components/UsersList';
