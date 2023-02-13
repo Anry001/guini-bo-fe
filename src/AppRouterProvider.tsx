@@ -12,9 +12,8 @@ const publicRoutes = createBrowserRouter([
   { path: 'login', element: <LoginPage /> },
 ]);
 
-// put here the datatable?
 const protectedRoutes = createBrowserRouter([
-  { path: '*', element: /* 'todo' */ <UsersList /> },
+  { path: '*', element: <UsersList /> },
   { path: 'login', element: <Navigate to="/" /> },
 ]);
 
