@@ -1,4 +1,4 @@
-export type UserStatus =
+type UserStatus =
   | 'UNCONFIRMED'
   | 'CONFIRMED'
   | 'EXTERNAL_PROVIDER'
