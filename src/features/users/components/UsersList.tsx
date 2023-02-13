@@ -1,26 +1,7 @@
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useUsers } from '../api/getUsers';
-
-type UserStatus =
-  | 'UNCONFIRMED'
-  | 'CONFIRMED'
-  | 'EXTERNAL_PROVIDER'
-  | 'ARCHIVED'
-  | 'UNKNOWN'
-  | 'RESET_REQUIRED'
-  | 'FORCE_CHANGE_PASSWORD';
-
-interface User {
-  email: string;
-  emailVerified: boolean;
-  firstName: string;
-  lastName: string;
-  phoneNumber: boolean;
-  phoneVerified: boolean;
-  userStatus: UserStatus;
-  username: string;
-}
+import { User } from '../types';
 
 const columns: GridColDef<User>[] = [
   { field: 'email', headerName: 'ID', width: 90 },
@@ -73,7 +54,7 @@ const columns: GridColDef<User>[] = [
   },
 ];
 
-const UsersList = () => {
+export const UsersList = () => {
   const { data = [], isLoading } = useUsers();
 
   return (
@@ -93,4 +74,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList;
+// export default UsersList;
