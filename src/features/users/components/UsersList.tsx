@@ -1,11 +1,6 @@
-// import apiRequest from '@utils/apiRequest';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { useQuery } from '@tanstack/react-query';
-// import { ResponseData } from '../types';
-import { getUsers } from '../api/getUsers';
-
-// implement this file with react query
+import { useUsers } from '../api/getUsers';
 
 type UserStatus =
   | 'UNCONFIRMED'
@@ -79,7 +74,7 @@ const columns: GridColDef<User>[] = [
 ];
 
 const UsersList = () => {
-  const { data = [] } = useQuery(['users'], getUsers);
+  const { data = [], isLoading } = useUsers();
 
   return (
     <Box sx={{ height: 400, width: '100%' }}>
@@ -92,6 +87,7 @@ const UsersList = () => {
         checkboxSelection
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
+        loading={isLoading}
       />
     </Box>
   );
