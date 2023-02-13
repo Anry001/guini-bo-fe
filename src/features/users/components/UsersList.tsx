@@ -73,5 +73,3 @@ export const UsersList = () => {
     </Box>
   );
 };
-
-// export default UsersList;
