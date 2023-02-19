@@ -1,10 +1,10 @@
-import apiRequest from '@utils/apiRequest';
+import axiosClient from '@lib/axios';
 import { useQuery } from '@tanstack/react-query';
 import { ExtractFnReturnType, QueryConfig } from '@/lib/react-query';
 import { User } from '../types';
 
 export const getUsers = async () => {
-  const res = await apiRequest.get<User[]>('/admin/api/users');
+  const res = await axiosClient.get<User[]>('/admin/api/users');
   return res.data;
 };
 

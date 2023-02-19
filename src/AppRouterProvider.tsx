@@ -13,7 +13,7 @@ const publicRoutes = createBrowserRouter([
 ]);
 
 const protectedRoutes = createBrowserRouter([
-  { path: 'login', element: <Navigate to="/users-list" /> },
+  { path: 'login', element: <Navigate to="/" /> },
   { path: 'users-list', element: <UsersList /> },
 ]);
 
