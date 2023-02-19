@@ -54,8 +54,7 @@ const columns: GridColDef<User>[] = [
   },
 ];
 
-// eslint-disable-next-line import/prefer-default-export
-export const UsersList = () => {
+const UsersList = () => {
   const { data = [], isLoading } = useUsers();
 
   return (
@@ -74,3 +73,5 @@ export const UsersList = () => {
     </Box>
   );
 };
+
+export default UsersList;

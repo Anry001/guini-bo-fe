@@ -1,3 +1,4 @@
-export * from './types';
+import UsersList from './components/UsersList';
 
-export * from './components/UsersList';
+export type { User } from './types';
+export { UsersList };

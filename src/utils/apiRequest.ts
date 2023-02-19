@@ -1,12 +1,19 @@
-import axios from 'axios';
+import axios, { AxiosHeaders } from 'axios';
 import env from '@config/env';
-
-const TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NTcxNzM1MiwianRpIjoiMDkyZTc5MjItZGFkYS00YzY1LWFhOTAtZjU1NmRlNGYwNmMyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjgzZTY0NzcxLTBhMzYtNDI1MC1hYTM1LTc5YzBkNzAwODU4ZCIsIm5iZiI6MTY3NTcxNzM1MiwiZXhwIjoxNjkxMjY5MzUyLCJkYXRhIjp7InVzZXJuYW1lIjoiODNlNjQ3NzEtMGEzNi00MjUwLWFhMzUtNzljMGQ3MDA4NThkIiwicm9sZSI6InVzZXIiLCJmaXJzdF9uYW1lIjoiXHUwNWQwXHUwNWUwXHUwNWU4XHUwNWQ5IiwibGFzdF9uYW1lIjoiXHUwNWQxXHUwNWRmIFx1MDVlNlx1MDVkOVx1MDVkNVx1MDVkZiIsInBob25lX251bWJlciI6Iis5NzI1NDc4NTU4NjYiLCJ2ZXJpZmllZCI6dHJ1ZSwiZ3JvdXBzIjpbInN1cGVyLWFkbWluIl19fQ.30ORz7dvdhNDKEMu4yeS7zfQFTYnE2GIzrwhVGQ0aGE';
 
 const apiRequest = axios.create({
   baseURL: `${env.VITE_BACKEND_URL}`,
-  headers: { Authorization: `Bearer ${TOKEN}` },
+});
+
+apiRequest.interceptors.request.use((config) => {
+  const token = JSON.parse(localStorage.getItem('auth-store') as string).state
+    .accessToken;
+
+  if (token) {
+    (config.headers as AxiosHeaders).set('Authorization', `Bearer ${token}`);
+  }
+
+  return config;
 });
 
 export default apiRequest;
