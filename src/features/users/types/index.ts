@@ -12,7 +12,7 @@ export interface User {
   emailVerified: boolean;
   firstName: string;
   lastName: string;
-  phoneNumber: boolean;
+  phoneNumber: string;
   phoneVerified: boolean;
   userStatus: UserStatus;
   username: string;

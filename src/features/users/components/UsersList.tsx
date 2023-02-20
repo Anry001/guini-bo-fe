@@ -2,6 +2,7 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useUsers } from '../api/getUsers';
 import { User } from '../types';
+import PhoneNumberCell from './PhoneNumberCell';
 
 const columns: GridColDef<User>[] = [
   { field: 'email', headerName: 'Email', width: 200 },
@@ -23,16 +24,14 @@ const columns: GridColDef<User>[] = [
   {
     field: 'phoneNumber',
     headerName: 'Phone number',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 125,
-  },
-  {
-    field: 'phoneVerified',
-    headerName: 'Phone Verified',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 110,
+    sortable: true,
+    width: 160,
+    renderCell: (params) => (
+      <PhoneNumberCell
+        phoneNumber={params.row.phoneNumber}
+        phoneNumberVerified={params.row.phoneVerified}
+      />
+    ),
   },
   {
     field: 'userStatus',

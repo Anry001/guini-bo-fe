@@ -16,13 +16,14 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
-    "paths": { 
+    "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@config/*": ["./src/config/*"],
       "@features/*": ["./src/features/*"],
       "@lib/*": ["./src/lib/*"],
       "@utils/*": ["./src/utils/*"],
+      "@hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["src", "vite.config.ts"],

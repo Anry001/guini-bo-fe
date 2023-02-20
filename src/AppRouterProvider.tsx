@@ -14,8 +14,8 @@ const publicRoutes = createBrowserRouter([
 ]);
 
 const protectedRoutes = createBrowserRouter([
-  { path: 'login', element: <Navigate to="/users-list" /> },
-  { path: 'users-list', element: /* <PartnerStoresList /> */ <UsersList /> }, //
+  { path: 'login', element: <Navigate to="/" /> },
+  { path: 'users-list', element: <UsersList /> },
 ]);
 
 const AppRouterProvider = () => {

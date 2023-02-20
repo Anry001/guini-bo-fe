@@ -1,5 +1,13 @@
+import {
+  registerAuthorizationToken,
+  removeAuthorizationToken,
+} from '@/lib/axios';
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import {
+  persist,
+  createJSONStorage,
+  subscribeWithSelector,
+} from 'zustand/middleware';
 
 export interface User {
   firstName: string;
@@ -25,23 +33,34 @@ interface UseAuthStoreData {
 }
 
 const useAuthStore = create(
-  persist<UseAuthStoreData>(
-    (set) => ({
-      user: null,
-      accessToken: null,
-      refreshToken: null,
-      setUserData: ({ user, accessToken, refreshToken }) => {
-        set({ user, accessToken, refreshToken });
+  subscribeWithSelector(
+    persist<UseAuthStoreData>(
+      (set) => ({
+        user: null,
+        accessToken: null,
+        refreshToken: null,
+        setUserData: ({ user, accessToken, refreshToken }) => {
+          set({ user, accessToken, refreshToken });
+        },
+        logout: () => {
+          set({ user: null, accessToken: null, refreshToken: null });
+        },
+      }),
+      {
+        name: 'auth-store',
+        storage: createJSONStorage(() => localStorage),
       },
-      logout: () => {
-        set({ user: null, accessToken: null, refreshToken: null });
-      },
-    }),
-    {
-      name: 'auth-store',
-      storage: createJSONStorage(() => localStorage),
-    },
+    ),
   ),
+);
+
+useAuthStore.subscribe(
+  (s) => s.accessToken,
+  (accessToken) => {
+    if (accessToken) registerAuthorizationToken(accessToken);
+    else removeAuthorizationToken();
+  },
+  { fireImmediately: true },
 );
 
 export default useAuthStore;
