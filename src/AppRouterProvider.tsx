@@ -6,6 +6,7 @@ import {
   Navigate,
   RouterProvider,
 } from 'react-router-dom';
+// import PartnerStoresList from './features/users/components/PartnerStoresList';
 
 const publicRoutes = createBrowserRouter([
   { path: '*', element: <Navigate to="/login" /> },
@@ -13,7 +14,7 @@ const publicRoutes = createBrowserRouter([
 ]);
 
 const protectedRoutes = createBrowserRouter([
-  { path: 'login', element: <Navigate to="/users-list" /> },
+  { path: 'login', element: <Navigate to="/" /> },
   { path: 'users-list', element: <UsersList /> },
 ]);
 

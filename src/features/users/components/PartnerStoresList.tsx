@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-// import { usePartnerStores } from '../api/getPartnerStores';
-// import { PartnerStore } from '../types';
+import { usePartnerStores } from '../api/getPartnerStores';
+import { PartnerStore } from '../types';
 
 const columns: GridColDef<PartnerStore>[] = [
   { field: 'businessCity', headerName: 'Business city', width: 200 },

@@ -1,23 +1,23 @@
 import axiosClient from '@lib/axios';
 import { useQuery } from '@tanstack/react-query';
 import { ExtractFnReturnType, QueryConfig } from '@/lib/react-query';
-import { User } from '../types';
+import { PartnerStore } from '../types';
 
-export const getUsers = async () => {
-  const res = await axiosClient.get<User[]>('/admin/api/users');
+export const getPartnerStores = async () => {
+  const res = await axiosClient.get<PartnerStore[]>('/api/partner-store');
   return res.data;
 };
 
-type QueryFnType = typeof getUsers;
+type QueryFnType = typeof getPartnerStores;
 
 type UseUsersOptions = {
   config?: QueryConfig<QueryFnType>;
 };
 
-export const useUsers = ({ config }: UseUsersOptions = {}) => {
+export const usePartnerStores = ({ config }: UseUsersOptions = {}) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     queryKey: ['users'],
-    queryFn: getUsers,
+    queryFn: getPartnerStores,
     ...config,
   });
 };
