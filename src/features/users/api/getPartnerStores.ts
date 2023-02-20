@@ -1,10 +1,10 @@
-import apiRequest from '@utils/apiRequest';
+import axiosClient from '@lib/axios';
 import { useQuery } from '@tanstack/react-query';
 import { ExtractFnReturnType, QueryConfig } from '@/lib/react-query';
 import { PartnerStore } from '../types';
 
 export const getPartnerStores = async () => {
-  const res = await apiRequest.get<PartnerStore[]>('/api/partner-store');
+  const res = await axiosClient.get<PartnerStore[]>('/api/partner-store');
   return res.data;
 };
 
