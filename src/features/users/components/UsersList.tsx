@@ -9,20 +9,16 @@ const columns: GridColDef<User>[] = [
     field: 'emailVerified',
     headerName: 'Email Verified',
     width: 115,
-    editable: true,
   },
   {
     field: 'firstName',
     headerName: 'First name',
     width: 100,
-    editable: true,
   },
   {
     field: 'lastName',
     headerName: 'Last name',
-    type: 'number',
     width: 120,
-    editable: true,
   },
   {
     field: 'phoneNumber',
@@ -58,13 +54,11 @@ const UsersList = () => {
   const { data = [], isLoading } = useUsers();
 
   return (
-    <Box sx={{ height: 400, width: '100%' }}>
+    <Box sx={{ height: 'calc(100vh - 82px)', width: '100%' }}>
       <DataGrid
         rows={data}
         columns={columns}
         getRowId={(row) => row.username}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
         checkboxSelection
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
