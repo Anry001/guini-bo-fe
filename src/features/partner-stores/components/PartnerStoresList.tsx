@@ -4,11 +4,71 @@ import { usePartnerStores } from '../api/getPartnerStores';
 import { PartnerStore } from '../types';
 
 const columns: GridColDef<PartnerStore>[] = [
-  { field: 'businessCity', headerName: 'Business city', width: 200 },
+  {
+    field: 'placeId',
+    headerName: 'Place ID',
+    width: 125,
+  },
+  {
+    field: 'partnerId',
+    headerName: 'Partner Id',
+    width: 300,
+  },
+  {
+    field: 'businessName',
+    headerName: 'Business Name',
+    width: 330,
+  },
+  { field: 'businessCity', headerName: 'Business city', width: 150 },
   {
     field: 'address',
     headerName: 'Address',
     width: 115,
+  },
+  {
+    field: 'description',
+    headerName: 'Description',
+    width: 150,
+  },
+  {
+    field: 'freeWorkingDistance',
+    headerName: 'Free Working Distance',
+    width: 170,
+  },
+  {
+    field: 'maxWorkingDistance',
+    headerName: 'Max Working Distance',
+    width: 175,
+  },
+  {
+    field: 'pricePerKm',
+    headerName: 'Price Per Km',
+    width: 110,
+  },
+  {
+    field: 'pictures',
+    headerName: 'Pictures',
+    width: 100,
+  },
+  {
+    field: 'isMobile',
+    headerName: 'Is Mobile',
+    width: 100,
+  },
+  {
+    field: 'partnerUsername',
+    headerName: 'Partner Username',
+    width: 150,
+  },
+  {
+    field: 'profilePicture',
+    headerName: 'Profile Picture',
+    width: 120,
+  },
+  {
+    field: 'shortestNotice',
+    headerName: 'Shortest Notice',
+    width: 140,
   },
   {
     field: 'lat',
@@ -19,66 +79,6 @@ const columns: GridColDef<PartnerStore>[] = [
     field: 'lng',
     headerName: 'Longitude',
     width: 120,
-  },
-  {
-    field: 'placeId',
-    headerName: 'Place ID',
-    width: 125,
-  },
-  {
-    field: 'businessName',
-    headerName: 'Business Name',
-    width: 110,
-  },
-  {
-    field: 'description',
-    headerName: 'Description',
-    width: 220,
-  },
-  {
-    field: 'freeWorkingDistance',
-    headerName: 'Free Working Distance',
-    width: 250,
-  },
-  {
-    field: 'isMobile',
-    headerName: 'Is Mobile',
-    width: 250,
-  },
-  {
-    field: 'maxWorkingDistance',
-    headerName: 'Max Working Distance',
-    width: 250,
-  },
-  {
-    field: 'partnerId',
-    headerName: 'Partner Id',
-    width: 250,
-  },
-  {
-    field: 'partnerUsername',
-    headerName: 'Partner Username',
-    width: 250,
-  },
-  {
-    field: 'pictures',
-    headerName: 'Pictures',
-    width: 250,
-  },
-  {
-    field: 'pricePerKm',
-    headerName: 'Price Per Km',
-    width: 250,
-  },
-  {
-    field: 'profilePicture',
-    headerName: 'Profile Picture',
-    width: 250,
-  },
-  {
-    field: 'shortestNotice',
-    headerName: 'Shortest Notice',
-    width: 250,
   },
 ];
 
