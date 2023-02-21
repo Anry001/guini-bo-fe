@@ -1,12 +1,11 @@
 import { useAuthStore } from '@features/auth';
 import { LoginPage } from '@features/login';
-import { UsersList } from '@features/users';
 import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
 } from 'react-router-dom';
-// import PartnerStoresList from './features/users/components/PartnerStoresList';
+import { PartnerStoresList } from '@features/partner-stores';
 
 const publicRoutes = createBrowserRouter([
   { path: '*', element: <Navigate to="/login" /> },
@@ -15,7 +14,7 @@ const publicRoutes = createBrowserRouter([
 
 const protectedRoutes = createBrowserRouter([
   { path: 'login', element: <Navigate to="/" /> },
-  { path: 'users-list', element: <UsersList /> },
+  { path: 'users-list', element: <PartnerStoresList /> },
 ]);
 
 const AppRouterProvider = () => {
