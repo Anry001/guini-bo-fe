@@ -71,14 +71,13 @@ const columns: GridColDef<PartnerStore>[] = [
     width: 140,
   },
   {
-    field: 'lat',
-    headerName: 'Latitude',
-    width: 100,
-  },
-  {
-    field: 'lng',
-    headerName: 'Longitude',
-    width: 120,
+    field: 'geocode',
+    headerName: 'Geocode',
+    width: 350,
+    valueGetter: (params) =>
+      `${params.row.businessLocation.geocode.lat || ''} ${
+        params.row.businessLocation.geocode.lng || ''
+      }`,
   },
 ];
 
