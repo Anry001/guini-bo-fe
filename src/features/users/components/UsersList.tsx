@@ -2,14 +2,13 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useUsers } from '../api/getUsers';
 import { User } from '../types';
-import PhoneNumberCell from './PhoneNumberCell';
+import VerifiedIconCell from './VerifiedIconCell';
 
 const columns: GridColDef<User>[] = [
-  { field: 'email', headerName: 'Email', width: 200 },
   {
-    field: 'emailVerified',
-    headerName: 'Email Verified',
-    width: 115,
+    field: 'username',
+    headerName: 'Username',
+    width: 250,
   },
   {
     field: 'firstName',
@@ -22,30 +21,32 @@ const columns: GridColDef<User>[] = [
     width: 120,
   },
   {
-    field: 'phoneNumber',
-    headerName: 'Phone number',
-    sortable: true,
-    width: 160,
+    field: 'email',
+    headerName: 'Email',
+    width: 250,
     renderCell: (params) => (
-      <PhoneNumberCell
-        phoneNumber={params.row.phoneNumber}
-        phoneNumberVerified={params.row.phoneVerified}
+      <VerifiedIconCell
+        cellValue={params.row.email}
+        isCellValueVerified={params.row.emailVerified}
       />
     ),
   },
   {
     field: 'userStatus',
     headerName: 'User status',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
     width: 220,
   },
   {
-    field: 'username',
-    headerName: 'Username',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 250,
+    field: 'phoneNumber',
+    headerName: 'Phone number',
+    sortable: true,
+    width: 160,
+    renderCell: (params) => (
+      <VerifiedIconCell
+        cellValue={params.row.phoneNumber}
+        isCellValueVerified={params.row.phoneVerified}
+      />
+    ),
   },
 ];
 
